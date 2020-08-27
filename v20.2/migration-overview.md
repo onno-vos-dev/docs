@@ -10,11 +10,14 @@ CockroachDB supports importing data from the following databases:
 
 - MySQL
 - Oracle (using CSV)
-- Postgres
+- Postgres (and <span class="version-tag">New in v20.2</span>: PostGIS)
 
 and from the following data formats:
 
 - CSV/TSV
+- <span class="version-tag">New in v20.2</span>: ESRI Shapefiles (`.shp`) (using `shp2pgsql`)
+- <span class="version-tag">New in v20.2</span>: OpenStreetMap data files (`.pbf`) (using `ogr2ogr`)
+- <span class="version-tag">New in v20.2</span>: GeoPackage data files (`.pbf`) (using `ogr2ogr`)
 
 This page lists general considerations to be aware of as you plan your migration to CockroachDB.
 
@@ -24,6 +27,9 @@ In addition to the information listed below, see the following pages for specifi
 - [Migrate from Postgres][postgres]
 - [Migrate from MySQL][mysql]
 - [Migrate from CSV][csv]
+- [Migrate from Shapefiles][shp]
+- [Migrate from OpenStreetMap][pbf]
+- [Migrate from GeoPackage][gpkg]
 
 ## File storage during import
 
@@ -79,3 +85,6 @@ In Postgres, you can emulate an `ENUM` type using a [`CHECK` constraint](check.h
 [mysql]: migrate-from-mysql.html
 [csv]: migrate-from-csv.html
 [import]: import.html
+[shp]: migrate-from-shapefiles.html
+[pbf]: migrate-from-openstreetmap.html
+[gpkg]: migrate-from-geopackage.html
