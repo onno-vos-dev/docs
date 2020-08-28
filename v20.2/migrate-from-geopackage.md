@@ -7,21 +7,25 @@ build_for: [cockroachdb]
 
 <span class="version-tag">New in v20.2</span>: CockroachDB supports efficiently storing and querying spatial data.
 
-This page has instructions for migrating data from GeoPackages into CockroachDB using [`shp2pgsql`](https://manpages.debian.org/stretch/postgis/shp2pgsql.1.en.html) and [`IMPORT`][import].
+This page has instructions for migrating data from GeoPackages into CockroachDB using [`ogr2ogr`](https://gdal.org/programs/ogr2ogr.html) and [`IMPORT`][import].
 
-In this example we will import a specific data set that is available as a [GeoPackage](https://en.wikipedia.org/wiki/GeoPackage): a [tornadoes data set](https://www.spc.noaa.gov/gis/svrgis/zipped/1950-2018-torn-initpoint.zip) that is [available from the US Nationial Weather Service](https://www.spc.noaa.gov/gis/svrgis/) (NWS).
+In this example we will import a specific data set that is available as a [GeoPackage](https://en.wikipedia.org/wiki/GeoPackage): a data set on household income and housing costs in the Australian Capital Territory that is [available from the Australian Bureau of Statistics](https://datapacks.censusdata.abs.gov.au/geopackages/).
 
+{{site.data.alerts.callout_info}}
 Please refer to the documentation of your GIS software for instructions on exporting GIS data to a GeoPackage.
+{{site.data.alerts.end}}
 
 ## Step 1. Convert the GeoPackage data to SQL
 
-To load the tornado GeoPackage into CockroachDB, we must first convert it to SQL using the `shp2pgsql` tool.
+To load the GeoPackage into CockroachDB, we must first convert it to SQL using the `ogr2ogr` tool.
 
-First, download and unzip the tornado data:
+First, download and unzip the household data:
+
+FIXME: Find another data set?  They will not allow `wget`
 
 {% include copy-clipboard.html %}
 ~~~ shell
-wget https://www.spc.noaa.gov/gis/svrgis/zipped/1950-2018-torn-initpoint.zip
+wget https://www.censusdata.abs.gov.au/CensusOutput/copsubdatapacks.nsf/744b1dbbc1af143cca2573ec00061d49/e4de1d138883f1e7ca25826e0023c379!OpenDocument
 ~~~
 
 {% include copy-clipboard.html %}
